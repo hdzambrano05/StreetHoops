@@ -15,7 +15,7 @@ body {
 .header {
     position: relative;
     height: 100vh;
-    background: url('img1.png') no-repeat center center/cover fixed;
+    background: url('img1.png');
     display: flex;
     align-items: center;
     justify-content: center;
