@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    text-decoration: none;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
@@ -15,12 +16,68 @@ body {
 .header {
     position: relative;
     height: 100vh;
-    background: url('img1.png') no-repeat center center/cover fixed;
+    background: linear-gradient(-45deg, #1e1e2f, #3a3a5d, #232330, #2e2e47);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    color: white;
+    overflow: hidden;
 }
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.header h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+}
+
+.header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    animation: fadeIn 3s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.buttons .btn {
+    margin-top: 20px;
+    background: #f18c07;
+    color: #000;
+    padding: 12px 25px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.buttons .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #f89a0c;
+}
+
 
 .overlay {
     position: absolute;
