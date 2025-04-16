@@ -88,38 +88,6 @@ body {
     z-index: 1;
 }
 
-.menu {
-    position: absolute;
-    top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #f97316;
-    margin-left: 20px;
-}
-
-.navbar ul {
-    display: flex;
-    gap: 20px;
-    margin-right: 20px;
-}
-
-.navbar ul li a {
-    color: #fff;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.navbar ul li a:hover {
-    color: #facc15;
-}
 
 .header-content {
     position: relative;
