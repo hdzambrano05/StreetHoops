@@ -20,7 +20,6 @@ body {
     background-size: cover;
     position: relative;
     height: 100vh;
-    animation: gradientShift 10s ease infinite;
     display: flex;
     align-items: center;
     justify-content: center;
