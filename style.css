@@ -247,7 +247,7 @@ body {
 }
 
 #patrocinadores img {
-    max-height: 6rem;
+    max-height: 8rem;
     object-fit: contain;
     filter: grayscale(100%);
     transition: filter 0.3s ease, transform 0.3s ease;
@@ -265,13 +265,6 @@ body {
     }
 }
 
-#patrocinadores img {
-    max-height: 6rem;
-    object-fit: contain;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, transform 0.3s ease;
-    margin-bottom: 1.5rem;
-}
 
 #patrocinadores img:hover {
     filter: grayscale(0);
