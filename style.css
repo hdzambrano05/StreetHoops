@@ -221,14 +221,10 @@ body {
 }
 
 .patrocinadores .grid {
-    display: flex;
-    justify-content: center;
-    /* Centra horizontalmente */
-    align-items: center;
-    /* Centra verticalmente */
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: flex; /* Cambia a Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 40px; /* Espaciado entre los patrocinadores */
 }
 
 .patrocinadores img {
@@ -236,10 +232,10 @@ body {
     object-fit: contain;
     filter: grayscale(100%);
     transition: filter 0.3s ease, transform 0.3s ease;
-    margin-bottom: 1rem;
-    /* Espaciado entre la imagen y el texto */
+    margin-bottom: 1rem; /* Espaciado entre la imagen y el texto */
     max-width: 100%;
     height: auto;
+    border-radius: 50px;
 }
 
 .patrocinadores img:hover {
