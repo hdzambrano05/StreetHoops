@@ -194,6 +194,7 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
 }
 
+/* Sección de patrocinadores */
 .patrocinadores {
     background-color: var(--background-dark);
     color: #ffffff;
@@ -220,22 +221,22 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* Contenedor de patrocinadores */
 .patrocinadores .grid {
-    display: flex; /* Cambia a Flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta el número de columnas automáticamente */
     gap: 40px; /* Espaciado entre los patrocinadores */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
 }
 
+/* Estilo de las imágenes */
 .patrocinadores img {
     max-height: 6rem;
     object-fit: contain;
     filter: grayscale(100%);
     transition: filter 0.3s ease, transform 0.3s ease;
     margin-bottom: 1rem; /* Espaciado entre la imagen y el texto */
-    max-width: 100%;
-    height: auto;
-    border-radius: 50px;
 }
 
 .patrocinadores img:hover {
@@ -243,10 +244,30 @@ body {
     transform: scale(1.1);
 }
 
+/* Estilo del texto */
 .patrocinadores h3 {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-light);
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .patrocinadores h2 {
+        font-size: 2rem;
+    }
+
+    .patrocinadores p {
+        font-size: 1rem;
+    }
+
+    .patrocinadores .grid {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+
+    .patrocinadores img {
+        max-height: 5rem;
+    }
 }
 
 .contact-section {
