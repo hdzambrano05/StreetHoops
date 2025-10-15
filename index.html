@@ -636,7 +636,8 @@
                 <div class="modal-grid">
                     <div class="modal-left">
                         <div class="modal-images">
-                            <img class="modal-poster" src="img/Poster (2).png" alt="Poster Torneo 1">
+                            <!-- Usar URL-encoding para espacios en nombre de archivo -->
+                            <img class="modal-poster" src="img/Poster%20(2).png" alt="Poster Torneo 1">
                             <img class="modal-poster" src="img/Posterf.jpg" alt="Poster Torneo 2">
                         </div>
                     </div>
@@ -646,6 +647,9 @@
                             <span class="news-badge">Noticias</span>
                             <h2 id="noticiaTitle">Anuncio del Torneo</h2>
                             <p>Revisa los posters oficiales con la información de sedes y horarios. Recuerda que la cancha para el torneo femenino será en <strong>Universidad Mariana</strong>.</p>
+                            <div class="modal-actions">
+                                <button id="descargarPoster" class="modal-cta">Descargar poster</button>
+                            </div>
                         </div>
                     </aside>
                 </div>

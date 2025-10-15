@@ -404,6 +404,36 @@
     margin: 0 20px;
     border: 1px solid rgba(0,0,0,0.06);
 }
+/* Reglas finales para asegurar modal reconstruido toma prioridad en producción */
+.noticia-modal, .noticia-modal * {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+.noticia-modal {
+    display: none !important; /* se mostrará cuando aria-hidden=false */
+    z-index: 999999 !important;
+}
+.noticia-modal[aria-hidden="false"], .noticia-modal.visible {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.noticia-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(8,8,10,0.7) !important;
+    backdrop-filter: blur(4px) !important;
+}
+.noticia-panel {
+    width: min(920px, calc(100% - 32px)) !important;
+    max-height: calc(100vh - 64px) !important;
+    overflow: auto !important;
+}
+.modal-images .modal-poster { max-height: 72vh; object-fit: contain; }
+
+/* Evitar que otras reglas .modal[aria-hidden] invisibilicen este modal */
+.modal[aria-hidden="false"], .modal.show { display: none !important; }
+
 .impact-header {
     text-align: center;
     margin-bottom: 1.5rem;
