@@ -162,6 +162,33 @@
     z-index: 1;
     border-radius: 20px;
 }
+
+    /* Modal: mostrar dos imágenes lado a lado en pantallas anchas, apiladas en móviles */
+    .modal-images {
+        display: flex;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .modal-images img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        border-radius: 12px;
+    }
+
+    /* En pantallas anchas, cada imagen ocupa el 50% */
+    @media (min-width: 700px) {
+        .modal-content { max-width: 900px; }
+        .modal-images img { width: 50%; }
+    }
+
+    /* En móviles apilar imágenes */
+    @media (max-width: 699px) {
+        .modal-images { flex-direction: column; }
+        .modal-content { max-width: 360px; padding: 10px; }
+    }
 @keyframes modalBgPulse {
     0% { filter: blur(0px) brightness(1); }
     100% { filter: blur(4px) brightness(1.1); }

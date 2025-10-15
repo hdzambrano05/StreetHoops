@@ -17,41 +17,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Gestión del Modal de Noticias
-    const modal = document.getElementById("noticiaModal");
-    const closeBtn = document.querySelector(".close-modal");
-    const modalBtn = document.querySelector(".modal-btn");
+    // Gestión del Modal de Noticias (único)
+    const modal = document.getElementById('noticiaModal');
+    const closeBtn = modal ? modal.querySelector('.close-modal') : null;
+    const modalBtn = document.querySelector('.modal-btn');
 
     // Mostrar el modal después de un pequeño delay
-    setTimeout(() => {
-        modal.classList.add("show");
-    }, 1000);
-
-    // Cerrar el modal al hacer clic en la X
-    closeBtn.addEventListener("click", () => {
-        modal.classList.remove("show");
+    if (modal) {
         setTimeout(() => {
-            modal.style.display = "none";
-        }, 300);
-    });
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('show'), 50);
+        }, 1000);
 
-    // Cerrar el modal al hacer clic fuera de él
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("show");
-            setTimeout(() => {
-                modal.style.display = "none";
-            }, 300);
+        // Cerrar el modal al hacer clic en la X
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            });
         }
-    });
 
-    // Cerrar el modal y desplazarse al formulario
-    modalBtn.addEventListener("click", () => {
-        modal.classList.remove("show");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 300);
-    });
+        // Cerrar el modal al hacer clic fuera de él
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            }
+        });
+
+        // Cerrar el modal y desplazarse al formulario
+        if (modalBtn) {
+            modalBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+            });
+        }
+    }
 
     // Gestión del Formulario Multi-paso
     const form = document.getElementById('whatsapp-form');
