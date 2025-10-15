@@ -151,17 +151,166 @@
 }
 /* MODAL IMPACTANTE */
 .impact-modal {
+    position: fixed; /* asegurar que esté sobre todo */
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 9999;
+    background: rgba(10,10,12,0.55); /* overlay semitransparente por defecto */
+    backdrop-filter: blur(4px);
 }
 .modal-bg-animated {
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at 60% 40%, #ff6b00 0%, #1b1726 80%);
-    opacity: 0.95;
+    opacity: 0.12; /* más sutil, el overlay principal lo controla .impact-modal */
     animation: modalBgPulse 4s infinite alternate;
-    z-index: 1;
+    z-index: 2;
     border-radius: 20px;
+    pointer-events: none;
 }
+
+/* Estilos adicionales para un modal de noticias con más estilo */
+.news-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(255, 152, 0, 0.14), rgba(255, 215, 64, 0.1));
+    color: #ff6b00;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.6px;
+    border: 1px solid rgba(255,107,0,0.12);
+    box-shadow: 0 6px 18px rgba(249,115,22,0.06);
+    text-transform: uppercase;
+}
+
+.close-modal {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.9));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.18);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.close-modal i { color: #222; font-size: 1rem; }
+.close-modal:hover { transform: translateY(-3px) rotate(-8deg); box-shadow: 0 12px 36px rgba(0,0,0,0.22); }
+
+/* Glass panel (lado derecho) para mejor contraste */
+.modal-right {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
+    border-left: 1px solid rgba(20,20,20,0.04);
+    box-shadow: -10px 0 40px rgba(0,0,0,0.05) inset;
+}
+
+/* Frames para los posters */
+.modal-images { gap: 14px; }
+.modal-images .modal-poster {
+    border-radius: 12px;
+    border: 6px solid rgba(255,255,255,0.85);
+    background-clip: padding-box;
+    box-shadow: 0 18px 48px rgba(2,6,23,0.5), 0 2px 6px rgba(0,0,0,0.12);
+    transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms cubic-bezier(.2,.9,.2,1);
+}
+.modal-images .modal-poster:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 24px 64px rgba(2,6,23,0.6); }
+
+/* Añadir un sutil marco entre los dos posters en desktop */
+@media (min-width: 700px) {
+    .modal-images { padding: 6px; background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius: 14px; }
+    .modal-images .modal-poster { width: calc(50% - 9px); }
+}
+
+/* Ajustes para la columna derecha: textos y botones */
+.modal-right h2 { color: #111; font-size: 1.12rem; margin-bottom: 6px; }
+.modal-right p { color: #444; font-size: 0.96rem; line-height: 1.45; }
+.modal-right .modal-cta { display:block; width:100%; border-radius: 10px; padding: 10px 12px; text-align:center; }
+
+/* Reduce la anchura del modal globalmente para que no ocupe tanto espacio en pantallas grandes */
+@media (min-width: 1100px) {
+    .modal-content.impact-content { max-width: 880px; }
+}
+
+/* Mejora la visibilidad en móviles (posters apilados con borde ligero) */
+@media (max-width: 699px) {
+    .modal-images { flex-direction: column; padding: 8px; }
+    .modal-images .modal-poster { width: 100%; border-width: 5px; }
+    .modal-right { padding: 14px; }
+}
+
+/* --- Nuevo modal reconstruido: clases limpias para evitar conflictos --- */
+.noticia-modal {
+    position: fixed;
+    inset: 0;
+    display: none; /* se muestra cuando aria-hidden=false o clase .visible */
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+.noticia-modal[aria-hidden="false"], .noticia-modal.visible { display: flex; }
+
+.noticia-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8,8,10,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+.noticia-panel {
+    position: relative;
+    z-index: 20;
+    width: min(920px, calc(100% - 40px));
+    background: linear-gradient(180deg, #ffffff, #fafafa);
+    border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(2,6,23,0.6);
+    overflow: hidden;
+}
+
+.noticia-panel .close-modal {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 25;
+    cursor: pointer;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    align-items: stretch;
+}
+
+.modal-left { padding: 14px; background: #f6f6f8; }
+.modal-right { padding: 18px; display:flex; flex-direction:column; justify-content:space-between; }
+.modal-actions { display:flex; gap:10px; align-items:center; }
+.modal-images { display:flex; gap:12px; }
+.modal-images .modal-poster { width: 50%; border-radius:10px; box-shadow:0 14px 40px rgba(0,0,0,0.18); }
+
+@media (max-width: 880px) {
+    .modal-grid { grid-template-columns: 1fr; }
+    .modal-images { flex-direction: column; }
+    .modal-images .modal-poster { width: 100%; }
+}
+
+/* seguridad: asegurar que no haya reglas antiguas que oculten este modal por aria-hidden */
+.noticia-modal[aria-hidden="true"] { display: none !important; }
+
+/* pequeño ajuste estético */
+.news-badge { display:inline-block; background: linear-gradient(90deg,#fff7,#fff); color:#ff6b00; padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.78rem; }
 
     /* Modal: mostrar dos imágenes lado a lado en pantallas anchas, apiladas en móviles */
     .modal-images {
@@ -189,21 +338,71 @@
         .modal-images { flex-direction: column; }
         .modal-content { max-width: 360px; padding: 10px; }
     }
+
+    /* Estilos mejorados para el modal de noticia */
+    .modal[aria-hidden="false"], .modal.show { display: flex; }
+    /* Ocultar explícitamente el modal cuando está marcado como oculto */
+    .modal[aria-hidden="true"] { display: none !important; }
+    .modal-content.impact-content { border-radius: 14px; }
+    .modal-grid { min-height: 220px; }
+    .modal-left { padding: 14px; background: linear-gradient(180deg, #f7f7f9, #ffffff); }
+    .modal-right h2 { font-weight:700; }
+    .modal-right p { line-height:1.4; }
+    .close-modal { color: #222; background: rgba(255,255,255,0.9); width:36px; height:36px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.12); }
+    .close-modal:hover { transform:scale(1.02); }
+    .modal-cta { background: linear-gradient(90deg,#ff9800,#ffb74d); color:#111; padding:8px 12px; border-radius:8px; font-weight:700; }
+    .btn-2 { background:#eee; border-radius:8px; border: none; cursor:pointer; }
+
+    @media (max-width: 880px) {
+        .modal-grid { grid-template-columns: 1fr; }
+        .modal-left { order: 1; }
+        .modal-right { order: 2; }
+    }
+
+    /* Poster styles */
+    .modal-poster {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(10,10,20,0.18);
+        transition: transform 260ms ease, box-shadow 260ms ease;
+        display: block;
+    }
+    .modal-poster:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 40px rgba(10,10,20,0.22); }
+
+    /* Two posters side-by-side on desktop */
+    @media (min-width: 700px) {
+        .modal-images { display: flex; }
+        .modal-images .modal-poster { width: calc(50% - 6px); }
+        .modal-content.impact-content { max-width: 760px; }
+    }
+
+    /* Stack posters on smaller screens */
+    @media (max-width: 699px) {
+        .modal-images { display: block; }
+        .modal-images .modal-poster { width: 100%; margin-bottom: 10px; }
+        .modal-content.impact-content { max-width: 360px; }
+    }
+
+    /* Modal entrance animation */
+    .modal.show .modal-content { animation: modalPop 360ms cubic-bezier(.2,.9,.2,1); }
+    @keyframes modalPop { from { transform: translateY(-8px) scale(.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 @keyframes modalBgPulse {
     0% { filter: blur(0px) brightness(1); }
     100% { filter: blur(4px) brightness(1.1); }
 }
 .impact-content {
     position: relative;
-    z-index: 2;
-    border-radius: 20px;
-    box-shadow: 0 0 40px 10px #ff6b00cc, 0 0 0 100vmax rgba(0,0,0,0.7);
+    z-index: 30; /* arriba del overlay y bg animado */
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(2,6,23,0.6);
     overflow: hidden;
-    background: rgba(30, 20, 40, 0.98);
-    padding: 2.5rem 2rem 2rem 2rem;
-    max-width: 420px;
-    margin: 0 auto;
-    border: 2px solid #ff6b00;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
+    padding: 18px;
+    max-width: 880px;
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    border: 1px solid rgba(0,0,0,0.06);
 }
 .impact-header {
     text-align: center;

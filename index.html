@@ -625,13 +625,29 @@
             <p>© 2025 StreetHoops 3x3 - Todos los derechos reservados</p>
         </div>
     </footer>
-        <!-- Modal de Noticia (con ambas imágenes de poster) -->
-        <div id="noticiaModal" class="modal impact-modal">
-            <div class="modal-bg-animated"></div>
-            <div class="modal-content impact-content" style="max-width: 720px; padding: 12px; border-radius: 16px; position: relative;">
-                <span class="close-modal" style="position: absolute; top: 8px; right: 14px; font-size: 1.8rem; cursor: pointer; z-index: 2;">&times;</span>
-                <div class="modal-images" style="width:100%;">
-                    <img src="img/Posterf.jpg" alt="Post Torneo 2" style="border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); display: block;">
+        <!-- Modal de Noticia (reconstruido) -->
+        <div id="noticiaModal" class="noticia-modal" aria-hidden="true" role="dialog" aria-labelledby="noticiaTitle">
+            <div class="noticia-overlay" aria-hidden="true"></div>
+            <div class="noticia-panel" role="document">
+                <button class="close-modal" aria-label="Cerrar noticia" title="Cerrar">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+
+                <div class="modal-grid">
+                    <div class="modal-left">
+                        <div class="modal-images">
+                            <img class="modal-poster" src="img/Poster (2).png" alt="Poster Torneo 1">
+                            <img class="modal-poster" src="img/Posterf.jpg" alt="Poster Torneo 2">
+                        </div>
+                    </div>
+
+                    <aside class="modal-right">
+                        <div>
+                            <span class="news-badge">Noticias</span>
+                            <h2 id="noticiaTitle">Anuncio del Torneo</h2>
+                            <p>Revisa los posters oficiales con la información de sedes y horarios. Recuerda que la cancha para el torneo femenino será en <strong>Universidad Mariana</strong>.</p>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </div>

@@ -17,39 +17,44 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Gestión del Modal de Noticias (único)
+    // Gestión del Modal de Noticias (reconstruido)
     const modal = document.getElementById('noticiaModal');
     const closeBtn = modal ? modal.querySelector('.close-modal') : null;
-    const modalBtn = document.querySelector('.modal-btn');
 
-    // Mostrar el modal después de un pequeño delay
+    function openModal() {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden', 'true');
+        modal.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+
     if (modal) {
-        setTimeout(() => {
-            modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('show'), 50);
-        }, 1000);
+        // Abrir automáticamente después de 1s
+        setTimeout(openModal, 1000);
 
-        // Cerrar el modal al hacer clic en la X
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('show');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
-            });
-        }
+        // Cerrar solo con la X
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-        // Cerrar el modal al hacer clic fuera de él
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('show');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
-            }
-        });
-
-        // Cerrar el modal y desplazarse al formulario
-        if (modalBtn) {
-            modalBtn.addEventListener('click', () => {
-                modal.classList.remove('show');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
+        // Botón descargar: descarga la primera imagen sin cerrar
+        const descargarBtn = document.getElementById('descargarPoster');
+        if (descargarBtn) {
+            descargarBtn.addEventListener('click', () => {
+                const img = modal.querySelector('.modal-images img');
+                if (img) {
+                    const link = document.createElement('a');
+                    link.href = img.src;
+                    link.download = 'poster.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                }
             });
         }
     }
